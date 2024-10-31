@@ -1,5 +1,5 @@
 // Define the pin numbers for ESP8266
-const int touchSensorPin = 5; // GPIO 5 on ESP8266 (D1 on NodeMCU)
+const int pirSensorPin = 5; // GPIO 5 on ESP8266 (D1 on NodeMCU)
 const int ledPin = 4;         // GPIO 4 on ESP8266 (D2 on NodeMCU)
 
 // Fill-in information from Blynk Device Info here
@@ -19,10 +19,10 @@ char pass[] = "1234567R";       // Your WiFi Password
 
 BlynkTimer timer;
 
-void touchSensorControl()
+void pirSensorControl()
 {
   // Read the state of the touch sensor
-  int sensorValue = digitalRead(touchSensorPin);
+  int sensorValue = digitalRead(pirSensorPin);
   Serial.println(sensorValue);
 
   // If the sensor is touched, turn on the LED and send the status to Blynk
@@ -50,7 +50,7 @@ void setup()
   Serial.begin(115200);
 
   // Set pin modes
-  pinMode(touchSensorPin, INPUT);  // Set touch sensor pin as input
+  pinMode(pirSensorPin, INPUT);  // Set touch sensor pin as input
   pinMode(ledPin, OUTPUT);         // Set LED pin as output
 
   // Connect to Blynk
@@ -58,7 +58,7 @@ void setup()
   
   // Set up a function to be called every second
   timer.setInterval(1000L, myTimerEvent);
-  timer.setInterval(100L, touchSensorControl);  // Check touch sensor every 100 ms
+  timer.setInterval(100L, pirSensorControl);  // Check touch sensor every 100 ms
 }
 
 void loop()
